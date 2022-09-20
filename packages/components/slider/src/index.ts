@@ -12,26 +12,24 @@ export type {
   RangeSliderInnerTrackProps,
   RangeSliderMarkProps,
   RangeSliderProps,
-  RangeSliderTrackProps,
   RangeSliderThumbProps,
+  RangeSliderTrackProps,
 } from "./range-slider"
 export {
   Slider,
-  SliderFilledTrack,
-  SliderMark,
   SliderProvider,
-  SliderThumb,
-  SliderTrack,
   useSliderContext,
   useSliderStyles,
 } from "./slider"
-export type {
-  SliderInnerTrackProps,
-  SliderMarkProps,
-  SliderProps,
-  SliderThumbProps,
-  SliderTrackProps,
-} from "./slider"
+export type { SliderProps } from "./slider"
+export { SliderFilledTrack } from "./slider-filled-track"
+export type { SliderInnerTrackProps } from "./slider-filled-track"
+export { SliderMark } from "./slider-mark"
+export type { SliderMarkProps } from "./slider-mark"
+export { SliderThumb } from "./slider-thumb"
+export type { SliderThumbProps } from "./slider-thumb"
+export { SliderTrack } from "./slider-track"
+export type { SliderTrackProps } from "./slider-track"
 export { useRangeSlider } from "./use-range-slider"
 export type {
   UseRangeSliderProps,
