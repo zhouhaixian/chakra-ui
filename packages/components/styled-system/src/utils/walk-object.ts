@@ -1,29 +1,4 @@
 import { isObject } from "@chakra-ui/shared-utils"
-import { tokenToCssVar } from "./token-to-css-var"
-
-export function createColorPalettesCssVars(
-  tokens: Record<string, any>,
-  cssVarPrefix?: string,
-) {
-  const keys = new Set<string>()
-  walkObject(tokens.colors, (value, path) => {
-    if (path.length <= 1) {
-      return
-    }
-    const prev = path[path.length - 1]
-    keys.add(prev)
-  })
-
-  const colorPalette = [...keys].reduce((previousValue, currentValue) => {
-    previousValue[currentValue] = tokenToCssVar(
-      `colorPalette.${currentValue}`,
-      cssVarPrefix,
-    ).reference
-    return previousValue
-  }, {} as Record<string, string>)
-
-  return { colorPalette }
-}
 
 export type WalkObjectPredicate<Leaf = unknown> = (
   value: unknown,

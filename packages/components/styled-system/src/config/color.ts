@@ -1,19 +1,17 @@
 import * as CSS from "csstype"
-import { Config, PropConfig } from "../utils/prop-config"
 import { t, Token } from "../utils"
-
-const colorPalettePropConfig: PropConfig = {
-  transform(value, theme) {
-    return theme.__colorPalettes?.[value]
-  },
-}
+import { Config } from "../utils/prop-config"
 
 export const color: Config = {
   color: t.colors("color"),
   textColor: t.colors("color"),
   fill: t.colors("fill"),
   stroke: t.colors("stroke"),
-  colorPalette: colorPalettePropConfig,
+  colorPalette: {
+    transform(value, theme) {
+      return theme.__colorPalettes?.[value]
+    },
+  },
 }
 
 export interface ColorProps {

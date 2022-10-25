@@ -9,6 +9,14 @@ export interface CreateThemeVarsOptions {
   cssVarPrefix?: string
 }
 
+function getPaletteName(path: string[]) {
+  if (path.includes("colorPalette")) return ""
+  const clone = [...path]
+  clone.pop()
+  clone.shift()
+  return clone.join(".")
+}
+
 export interface ThemeVars {
   cssVars: Record<string, any>
   cssMap: Record<string, any>
@@ -26,8 +34,8 @@ export function createThemeVars(
     const { variable, reference } = tokenToCssVar(token, options?.cssVarPrefix)
 
     if (!isSemantic) {
+      const keys = token.split(".")
       if (token.startsWith("space")) {
-        const keys = token.split(".")
         const [firstKey, ...referenceKeys] = keys
         /** @example space.-4 */
         const negativeLookupKey = `${firstKey}.-${referenceKeys.join(".")}`
@@ -37,6 +45,8 @@ export function createThemeVars(
           value: negativeValue,
           var: variable,
           varRef: negatedReference,
+          path: keys,
+          palette: getPaletteName(keys),
         }
       }
 
@@ -45,12 +55,16 @@ export function createThemeVars(
         value,
         var: variable,
         varRef: reference,
+        path: keys,
+        palette: getPaletteName(keys),
       }
       continue
     }
 
+    const keys = String(token).split(".")
+
     const lookupToken = (maybeToken: string) => {
-      const scale = String(token).split(".")[0]
+      const scale = keys[0]
       const withScale = [scale, maybeToken].join(".")
       /** @example flatTokens['space.4'] === '16px' */
       const resolvedTokenValue = flatTokens[withScale]
@@ -65,7 +79,8 @@ export function createThemeVars(
       cssVars,
       Object.entries(normalizedValue).reduce(
         (acc, [conditionAlias, conditionValue]) => {
-          const maybeReference = lookupToken(conditionValue)
+          if (!conditionValue) return acc
+          const maybeReference = lookupToken(String(conditionValue))
           if (conditionAlias === "default") {
             acc[variable] = maybeReference
             return acc
@@ -86,6 +101,8 @@ export function createThemeVars(
       value: reference,
       var: variable,
       varRef: reference,
+      path: keys,
+      palette: getPaletteName(keys),
     }
   }
 

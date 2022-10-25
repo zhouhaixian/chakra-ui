@@ -3,7 +3,7 @@ import type { WithCSSVar } from "../utils"
 import { createThemeVars } from "./create-theme-vars"
 import { extractSemanticTokens, extractTokens, omitVars } from "./theme-tokens"
 import { flattenTokens } from "./flatten-tokens"
-import { createColorPalettesCssVars } from "./create-color-palettes-css-vars"
+import { createColorPalettesCssVars } from "./create-palette-vars"
 
 export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
   /**
@@ -16,12 +16,15 @@ export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
   const tokens = extractTokens(theme)
   const semanticTokens = extractSemanticTokens(theme)
   const cssVarPrefix = theme.config?.cssVarPrefix
-  const colorPalette = createColorPalettesCssVars(theme.tokens, cssVarPrefix)
+  const colorPalette = createColorPalettesCssVars(tokens, cssVarPrefix)
   const flatTokens = flattenTokens({
     tokens,
     semanticTokens: {
       ...semanticTokens,
-      colorPalette,
+      colors: {
+        ...semanticTokens?.colors,
+        ...colorPalette,
+      },
     },
   })
 
@@ -38,6 +41,8 @@ export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
     cssVars,
   } = createThemeVars(flatTokens, { cssVarPrefix })
 
+  console.log(cssMap)
+
   const defaultCssVars: Record<string, any> = {
     "--chakra-ring-inset": "var(--chakra-empty,/*!*/ /*!*/)",
     "--chakra-ring-offset-width": "0px",
@@ -53,13 +58,26 @@ export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
     __cssVars: { ...defaultCssVars, ...cssVars },
     __cssMap: cssMap,
     __breakpoints: analyzeBreakpoints(theme.breakpoints),
+    __colorPalettes: generatePaletteVars(cssMap),
   })
 
   return theme as WithCSSVar<T>
 }
 
-// const a = {
-//   blue: {
-//     '--colors-colorpalette-50': "var(--colors-blue-50)"
-//   }
-// }
+function generatePaletteVars(
+  cssMap: Record<string, { palette: string; varRef: string; var: string }>,
+) {
+  const result: Record<string, any> = {}
+
+  for (const [key, token] of Object.entries(cssMap)) {
+    const { palette } = token
+    if (!palette) continue
+    // group by palette
+    result[palette] = result[palette] || {}
+    const computedKey = key.replace(palette, "colorPalette")
+    const computedKeyVar = cssMap[computedKey]?.var
+    result[palette][computedKeyVar] = token.varRef
+  }
+
+  return result
+}
