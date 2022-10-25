@@ -3,6 +3,7 @@ import type { WithCSSVar } from "../utils"
 import { createThemeVars } from "./create-theme-vars"
 import { extractSemanticTokens, extractTokens, omitVars } from "./theme-tokens"
 import { flattenTokens } from "./flatten-tokens"
+import { createColorPalettesCssVars } from "./create-color-palettes-css-vars"
 
 export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
   /**
@@ -14,9 +15,15 @@ export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
   // omit components and breakpoints from css variable map
   const tokens = extractTokens(theme)
   const semanticTokens = extractSemanticTokens(theme)
-  const flatTokens = flattenTokens({ tokens, semanticTokens })
-
   const cssVarPrefix = theme.config?.cssVarPrefix
+  const colorPalette = createColorPalettesCssVars(theme.tokens, cssVarPrefix)
+  const flatTokens = flattenTokens({
+    tokens,
+    semanticTokens: {
+      ...semanticTokens,
+      colorPalette,
+    },
+  })
 
   const {
     /**
@@ -50,3 +57,9 @@ export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
 
   return theme as WithCSSVar<T>
 }
+
+// const a = {
+//   blue: {
+//     '--colors-colorpalette-50': "var(--colors-blue-50)"
+//   }
+// }

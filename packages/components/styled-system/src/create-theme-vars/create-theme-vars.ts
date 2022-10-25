@@ -1,9 +1,9 @@
 import { isObject } from "@chakra-ui/shared-utils"
 import { calc, Operand } from "./calc"
-import { cssVar } from "./css-var"
 import { FlatToken, FlatTokens } from "./flatten-tokens"
 import { pseudoSelectors } from "../pseudos"
 import mergeWith from "lodash.mergewith"
+import { tokenToCssVar } from "./token-to-css-var"
 
 export interface CreateThemeVarsOptions {
   cssVarPrefix?: string
@@ -12,20 +12,6 @@ export interface CreateThemeVarsOptions {
 export interface ThemeVars {
   cssVars: Record<string, any>
   cssMap: Record<string, any>
-}
-
-/**
- * Convert a token name to a css variable
- *
- * @example
- * tokenToCssVar('colors.red.500', 'chakra')
- * => {
- *   variable: '--chakra-colors-red-500',
- *   reference: 'var(--chakra-colors-red-500)'
- * }
- */
-function tokenToCssVar(token: string | number, prefix?: string) {
-  return cssVar(String(token).replace(/\./g, "-"), undefined, prefix)
 }
 
 export function createThemeVars(
