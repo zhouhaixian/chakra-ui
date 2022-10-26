@@ -10,7 +10,7 @@ export interface CreateThemeVarsOptions {
 }
 
 function getPaletteName(path: string[]) {
-  if (path.includes("colorPalette")) return ""
+  if (path[0] !== "colors" || path.includes("colorPalette")) return ""
   const clone = [...path]
   clone.pop()
   clone.shift()
