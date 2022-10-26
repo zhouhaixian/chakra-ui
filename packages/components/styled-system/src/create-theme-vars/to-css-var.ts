@@ -41,8 +41,6 @@ export function toCSSVar<T extends Record<string, any>>(rawTheme: T) {
     cssVars,
   } = createThemeVars(flatTokens, { cssVarPrefix })
 
-  console.log(cssMap)
-
   const defaultCssVars: Record<string, any> = {
     "--chakra-ring-inset": "var(--chakra-empty,/*!*/ /*!*/)",
     "--chakra-ring-offset-width": "0px",
