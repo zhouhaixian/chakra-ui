@@ -4,6 +4,13 @@ import type {
   SystemStyleObject,
 } from "@chakra-ui/styled-system"
 import type { Interpolation } from "@emotion/react"
+import {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ElementType,
+  ValidationMap,
+  WeakValidationMap,
+} from "react"
 
 export interface ChakraProps extends SystemProps {
   /**
@@ -26,12 +33,12 @@ export interface ChakraProps extends SystemProps {
   css?: Interpolation<{}>
 }
 
-export type As<Props = any> = React.ElementType<Props>
+export type As<Props = any> = ElementType<Props>
 
 /**
  * Extract the props of a React element or component
  */
-export type PropsOf<T extends As> = React.ComponentPropsWithoutRef<T> & {
+export type PropsOf<T extends As> = ComponentPropsWithoutRef<T> & {
   as?: As
 }
 
@@ -63,16 +70,16 @@ export type MergeWithAs<
 export type ComponentWithAs<Component extends As, Props extends object = {}> = {
   <AsComponent extends As = Component>(
     props: MergeWithAs<
-      React.ComponentProps<Component>,
-      React.ComponentProps<AsComponent>,
+      ComponentProps<Component>,
+      ComponentProps<AsComponent>,
       Props,
       AsComponent
     >,
   ): JSX.Element
 
   displayName?: string
-  propTypes?: React.WeakValidationMap<any>
-  contextTypes?: React.ValidationMap<any>
+  propTypes?: WeakValidationMap<any>
+  contextTypes?: ValidationMap<any>
   defaultProps?: Partial<any>
   id?: string
 }
