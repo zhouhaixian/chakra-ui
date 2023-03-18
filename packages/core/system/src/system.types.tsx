@@ -53,21 +53,24 @@ export type OmitCommonProps<
 }
 
 export type RightJoinProps<
-  SourceProps extends object = {},
-  OverrideProps extends object = {},
+  SourceProps = Record<never, never>,
+  OverrideProps = Record<never, never>,
 > = OmitCommonProps<SourceProps, keyof OverrideProps> & OverrideProps
 
 export type MergeWithAs<
-  ComponentProps extends object,
-  AsProps extends object,
-  AdditionalProps extends object = {},
+  ComponentProps,
+  AsProps,
+  AdditionalProps = Record<never, never>,
   AsComponent extends As = As,
 > = RightJoinProps<ComponentProps, AdditionalProps> &
   RightJoinProps<AsProps, AdditionalProps> & {
     as?: AsComponent
   }
 
-export type ComponentWithAs<Component extends As, Props extends object = {}> = {
+export type ComponentWithAs<
+  Component extends As,
+  Props = Record<never, never>,
+> = {
   <AsComponent extends As = Component>(
     props: MergeWithAs<
       ComponentProps<Component>,
@@ -84,5 +87,5 @@ export type ComponentWithAs<Component extends As, Props extends object = {}> = {
   id?: string
 }
 
-export interface ChakraComponent<T extends As, P = {}>
+export interface ChakraComponent<T extends As, P = Record<never, never>>
   extends ComponentWithAs<T, ChakraProps & P> {}
