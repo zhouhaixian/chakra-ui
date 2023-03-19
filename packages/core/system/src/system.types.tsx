@@ -5,8 +5,8 @@ import type {
 } from "@chakra-ui/styled-system"
 import type { Interpolation } from "@emotion/react"
 import {
-  ComponentProps,
   ComponentPropsWithoutRef,
+  ComponentProps,
   ElementType,
   ValidationMap,
   WeakValidationMap,
@@ -42,6 +42,9 @@ export type PropsOf<T extends As> = ComponentPropsWithoutRef<T> & {
   as?: As
 }
 
+export type Assign<Destination, Source> = Omit<Destination, keyof Source> &
+  Source
+
 export type OmitCommonProps<
   Target,
   OmitAdditionalProps extends keyof any = never,
@@ -72,12 +75,10 @@ export type ComponentWithAs<
   Props = Record<never, never>,
 > = {
   <AsComponent extends As = Component>(
-    props: MergeWithAs<
-      ComponentProps<Component>,
-      ComponentProps<AsComponent>,
-      Props,
-      AsComponent
-    >,
+    props: RightJoinProps<ComponentProps<Component>, Props> &
+      RightJoinProps<ComponentProps<AsComponent>, Props> & {
+        as?: AsComponent
+      },
   ): JSX.Element
 
   displayName?: string

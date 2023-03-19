@@ -1,16 +1,17 @@
 import { useColorMode } from "@chakra-ui/color-mode"
-import {
-  css,
-  isStyleProp,
-  StyleProps,
-  SystemStyleObject,
-} from "@chakra-ui/styled-system"
+import { css, isStyleProp, SystemStyleObject } from "@chakra-ui/styled-system"
 import { Dict, filterUndefined, objectFilter, runIfFn } from "@chakra-ui/utils"
 import { assignAfter } from "@chakra-ui/object-utils"
 import createStyled, { CSSObject, FunctionInterpolation } from "@emotion/styled"
 import React from "react"
 import { shouldForwardProp } from "./should-forward-prop"
-import { As, ChakraComponent, ChakraProps, PropsOf } from "./system.types"
+import {
+  As,
+  Assign,
+  ChakraComponent,
+  ChakraProps,
+  PropsOf,
+} from "./system.types"
 import { DOMElements } from "./system.utils"
 
 const emotion_styled = ((createStyled as any).default ??
@@ -63,6 +64,7 @@ export const toCSSObject: GetStyleObject =
 
 export interface ChakraStyledOptions extends Dict {
   shouldForwardProp?(prop: string): boolean
+
   label?: string
   baseStyle?:
     | SystemStyleObject
@@ -101,11 +103,7 @@ export function styled<T extends As, P = {}>(
 }
 
 export type HTMLChakraComponents = {
-  [Tag in DOMElements]: ChakraComponent<Tag, {}>
+  [Tag in DOMElements]: ChakraComponent<Tag>
 }
 
-export type HTMLChakraProps<T extends As> = Omit<
-  PropsOf<T>,
-  "ref" | keyof StyleProps
-> &
-  ChakraProps & { as?: As }
+export type HTMLChakraProps<T extends As> = Assign<PropsOf<T>, ChakraProps>
