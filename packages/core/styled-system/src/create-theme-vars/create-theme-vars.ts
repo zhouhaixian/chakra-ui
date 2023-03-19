@@ -73,7 +73,9 @@ export function createThemeVars(
       return reference
     }
 
-    const normalizedValue = isObject(value) ? value : { default: value }
+    const normalizedValue: Record<string, any> = isObject(value)
+      ? value
+      : { default: value }
 
     cssVars = mergeWith(
       cssVars,

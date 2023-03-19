@@ -10,6 +10,7 @@ export const MenuIcon: React.FC<HTMLChakraProps<"span">> = (props) => {
 
   const clone = isValidElement(child)
     ? cloneElement(child, {
+        // @ts-expect-error 'focusable' does not exist in type 'Partial<unknown> & Attributes'
         focusable: "false",
         "aria-hidden": true,
         className: cx("chakra-menu__icon", child.props.className),

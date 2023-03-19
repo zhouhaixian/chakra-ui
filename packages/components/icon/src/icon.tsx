@@ -1,7 +1,7 @@
 import {
   chakra,
-  ChakraProps,
   forwardRef,
+  HTMLChakraProps,
   SystemStyleObject,
   useStyleConfig,
 } from "@chakra-ui/system"
@@ -28,9 +28,7 @@ const fallbackIcon = {
 
 type Orientation = "vertical" | "horizontal"
 
-export interface IconProps
-  extends Omit<React.SVGAttributes<SVGElement>, keyof ChakraProps>,
-    ChakraProps {
+export interface IconProps extends HTMLChakraProps<"svg"> {
   orientation?: Orientation
 }
 

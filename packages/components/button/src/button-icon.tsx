@@ -7,6 +7,7 @@ export function ButtonIcon(props: HTMLChakraProps<"span">) {
 
   const _children = isValidElement(children)
     ? cloneElement(children, {
+        // @ts-expect-error '"aria-hidden"' does not exist in type 'Partial<unknown> & Attributes'
         "aria-hidden": true,
         focusable: false,
       })
