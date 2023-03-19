@@ -6,7 +6,9 @@ type Pretty<T> = { [K in keyof T]: T[K] } & {}
 type Merge<P, T> = Pretty<Omit<P, keyof T> & T>
 type LegacyProps = "as" | "legacyBehavior" | "passHref"
 
-type LinkComponent = FC<RefAttributes<HTMLAnchorElement> & LinkProps>
+type LinkComponent = FC<
+  RefAttributes<HTMLAnchorElement> & Omit<LinkProps, LegacyProps>
+>
 
 export type LinkProps = Merge<
   HTMLChakraProps<"a">,
