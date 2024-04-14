@@ -1,7 +1,7 @@
-import { Inter } from "next/font/google"
+import { Plus_Jakarta_Sans } from "next/font/google"
 import Provider from "./provider"
 
-const inter = Inter({
+const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
 })
@@ -12,9 +12,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className={inter.className} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head />
-      <body>
+      <body className={jakartaSans.className}>
         <Provider>{children}</Provider>
       </body>
     </html>
