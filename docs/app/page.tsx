@@ -15,6 +15,7 @@ import { AdBanner } from "../components/chakra-pro/ad-banner"
 import { ColorModeToggle } from "../components/color-mode-toggle"
 import { CommunityGFX } from "../components/community-gfx"
 import { Logo, LogoIcon } from "../components/logo"
+import { StatsGFX } from "../components/stats-gfx"
 import { getStats } from "../utils/get-stats"
 import { splitNumUnit } from "../utils/number-formatter"
 
@@ -69,7 +70,14 @@ export default async function Page() {
         </Flex>
       </Flex>
       {/* Stats */}
-      <Flex align="center" maxW="8xl" mx="auto" px="12">
+      <Flex
+        align="center"
+        maxW="8xl"
+        mx="auto"
+        px="12"
+        pos="relative"
+        direction="column"
+      >
         <Stack px="8" py="32" gap="16" justify="center" flex="1">
           <Stack gap="4">
             <Stack gap="2">
@@ -145,6 +153,7 @@ export default async function Page() {
             </Avatar.Group>
           </Stack>
         </Stack>
+        <StatsGFX />
       </Flex>
       {/* Community */}
       <Flex align="center" maxW="8xl" mx="auto" pl="12" justify="space-between">
