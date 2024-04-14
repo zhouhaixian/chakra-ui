@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Flex,
   Icon,
@@ -8,13 +9,18 @@ import {
   Stack,
 } from "@chakra-ui/react"
 import NextLink from "next/link"
-import { BsGithub } from "react-icons/bs"
+import { BsDiscord, BsGithub, BsLightningCharge } from "react-icons/bs"
+import { HiDownload } from "react-icons/hi"
 import { AdBanner } from "../components/chakra-pro/ad-banner"
 import { ColorModeToggle } from "../components/color-mode-toggle"
 import { CommunityGFX } from "../components/community-gfx"
 import { Logo, LogoIcon } from "../components/logo"
+import { getStats } from "../utils/get-stats"
+import { splitNumUnit } from "../utils/number-formatter"
 
 export default async function Page() {
+  const stats = await getStats()
+
   return (
     <>
       <AdBanner />
@@ -61,6 +67,84 @@ export default async function Page() {
             </Flex>
           </Flex>
         </Flex>
+      </Flex>
+      {/* Stats */}
+      <Flex align="center" maxW="8xl" mx="auto" px="12">
+        <Stack px="8" py="32" gap="16" justify="center" flex="1">
+          <Stack gap="4">
+            <Stack gap="2">
+              <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+                Stats
+              </Span>
+              <Span fontWeight="bold" fontSize="4xl">
+                Chakra is growing quickly
+              </Span>
+            </Stack>
+            <Span color="#646464" fontWeight="medium" fontSize="lg">
+              We're dedicated to improving the experience and performance of
+              Chakra UI.
+            </Span>
+          </Stack>
+          <Flex gap="32">
+            {[
+              {
+                description: "Downloads per month",
+                icon: HiDownload,
+                count: stats.npmDownloads,
+              },
+              {
+                description: "Github Stars",
+                icon: BsGithub,
+                count: stats.githubStars,
+              },
+              {
+                description: "Core contributors",
+                icon: BsLightningCharge,
+                count: stats.members.length.toString(),
+              },
+              {
+                description: "Discord members",
+                icon: BsDiscord,
+                count: stats.discordMembers,
+              },
+            ].map((stat) => {
+              console.log(stat.count)
+
+              const count = splitNumUnit(stat.count)
+              return (
+                <Stack gap="1" key={stat.description}>
+                  <Flex fontSize="7xl" align="center" fontWeight="bold">
+                    {count?.[0]}
+                    <Span textTransform="uppercase" fontSize="6xl">
+                      {count?.[1]}
+                    </Span>
+                  </Flex>
+                  <Flex gap="2" align="center">
+                    <Icon asChild boxSize="6">
+                      <stat.icon />
+                    </Icon>
+                    <Span fontWeight="medium" color="#646464">
+                      {stat.description}
+                    </Span>
+                  </Flex>
+                </Stack>
+              )
+            })}
+          </Flex>
+          <Stack gap="8">
+            <Span fontWeight="bold" fontSize="xl">
+              Our Heroes
+            </Span>
+            <Avatar.Group size="xl">
+              {stats.members.map((mem: any, i: number) => (
+                <Avatar.Root key={i}>
+                  <Avatar.Image src={mem.avatar_url} />
+                  <Avatar.Fallback name={mem.name} />
+                </Avatar.Root>
+              ))}
+            </Avatar.Group>
+          </Stack>
+        </Stack>
       </Flex>
       {/* Community */}
       <Flex align="center" maxW="8xl" mx="auto" pl="12" justify="space-between">

@@ -83,7 +83,8 @@ Renamed all `container` parts to `root`. Kindly update your theme to reflect
 ### Removed Components and Packages
 
 - Removed `ControlBox` component
-- Removed `@chakra-ui/icons` package. Prefer to use [`lucide-react`](https://lucide.dev/guide/packages/lucide-react) or
+- Removed `@chakra-ui/icons` package. Prefer to use
+  [`lucide-react`](https://lucide.dev/guide/packages/lucide-react) or
   `react-icons` instead.
 
 ### Root component and types
@@ -670,7 +671,7 @@ const Demo = () => {
 
 ### chakra factory
 
-The `chakra` factory has been recipes to make it easier to style components
+The `chakra` factory has been **recipe**s to make it easier to style components
 using recipes. Its API is inspired by Panda CSS and Stitches.
 
 - Renamed `baseStyle` to `base`
