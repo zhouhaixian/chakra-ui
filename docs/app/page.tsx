@@ -1,23 +1,32 @@
 import {
+  AspectRatio,
   Avatar,
   Button,
   Flex,
   Icon,
   IconButton,
   Link,
+  LinkBox,
+  LinkOverlay,
+  SimpleGrid,
   Span,
   Stack,
+  Text,
 } from "@chakra-ui/react"
+import Image from "next/image"
 import NextLink from "next/link"
 import { BsDiscord, BsGithub, BsLightningCharge } from "react-icons/bs"
-import { HiDownload } from "react-icons/hi"
+import { HiDownload, HiOutlineArrowNarrowRight } from "react-icons/hi"
 import { AdBanner } from "../components/chakra-pro/ad-banner"
 import { ColorModeToggle } from "../components/color-mode-toggle"
 import { CommunityGFX } from "../components/community-gfx"
 import { Logo, LogoIcon } from "../components/logo"
 import { StatsGFX } from "../components/stats-gfx"
+import json from "../configs/showcase.json"
 import { getStats } from "../utils/get-stats"
 import { splitNumUnit } from "../utils/number-formatter"
+
+const websites = json.data.slice(0, 8)
 
 export default async function Page() {
   const stats = await getStats()
@@ -69,15 +78,96 @@ export default async function Page() {
           </Flex>
         </Flex>
       </Flex>
+      {/* Case studies */}
+      <Flex align="center" maxW="8xl" mx="auto" px="12">
+        <Stack px="8" gap="16" flex="1">
+          <Stack gap="16">
+            <Stack gap="4">
+              <Stack gap="2">
+                <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+                  Case Studies
+                </Span>
+                <Span fontWeight="bold" fontSize="4xl">
+                  Built with Chakra
+                </Span>
+              </Stack>
+              <Span color="#646464" fontWeight="medium" fontSize="lg">
+                Your project can look as good as these! Check them out
+              </Span>
+            </Stack>
+            <Button
+              size="lg"
+              colorPalette="teal"
+              rounded="4px"
+              px="7"
+              w="fit-content"
+              asChild
+            >
+              <Link href="/showcase" external unstyled>
+                <span>View Showcases</span>
+                <Icon asChild>
+                  <HiOutlineArrowNarrowRight />
+                </Icon>
+              </Link>
+            </Button>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="8" w="full">
+              {websites.map(({ name, image, url }) => (
+                <LinkBox
+                  cursor="pointer"
+                  pos="relative"
+                  key={url}
+                  shadow={{ base: "xs", _hover: "lg" }}
+                  transition="all 0.2s ease"
+                  rounded="lg"
+                  overflow="clip"
+                >
+                  <AspectRatio ratio={16 / 9} w="full">
+                    <Image
+                      height={200}
+                      width={300}
+                      alt={name}
+                      style={{ objectFit: "cover" }}
+                      src={
+                        image
+                          ? /^(https|http)/.test(image)
+                            ? image
+                            : `/${image}`
+                          : "/og-image.png"
+                      }
+                    />
+                  </AspectRatio>
+                  <LinkOverlay href={url} external>
+                    <Text
+                      fontWeight="semibold"
+                      textAlign="start"
+                      fontSize={{ base: "sm", md: "md" }}
+                      pos="absolute"
+                      bottom="4"
+                      right="4"
+                      shadow="md"
+                      rounded="full"
+                      display="flex"
+                      gap="3"
+                      alignItems="center"
+                      px="2"
+                      py="1.5"
+                      bg="bg"
+                    >
+                      {name}
+                      <Icon asChild boxSize="6">
+                        <HiOutlineArrowNarrowRight />
+                      </Icon>
+                    </Text>
+                  </LinkOverlay>
+                </LinkBox>
+              ))}
+            </SimpleGrid>
+          </Stack>
+        </Stack>
+      </Flex>
+
       {/* Stats */}
-      <Flex
-        align="center"
-        maxW="8xl"
-        mx="auto"
-        px="12"
-        pos="relative"
-        direction="column"
-      >
+      <Flex maxW="8xl" mx="auto" px="12" direction="column">
         <Stack px="8" py="32" gap="16" justify="center" flex="1">
           <Stack gap="4">
             <Stack gap="2">
