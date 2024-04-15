@@ -165,7 +165,6 @@ export default async function Page() {
           </Stack>
         </Stack>
       </Flex>
-
       {/* Stats */}
       <Flex maxW="8xl" mx="auto" px="12" direction="column">
         <Stack px="8" py="32" gap="16" justify="center" flex="1">
@@ -244,6 +243,53 @@ export default async function Page() {
           </Stack>
         </Stack>
         <StatsGFX />
+      </Flex>
+      {/* Pro */}
+      <Flex align="center" maxW="8xl" mx="auto" px="12">
+        <Stack px="8" gap="16" flex="1">
+          <Stack gap="16" align="center" textAlign="center">
+            <Stack gap="4">
+              <Stack gap="2">
+                <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+                  Premium
+                </Span>
+                <Span fontWeight="bold" fontSize="4xl">
+                  Go faster. Go Pro.
+                </Span>
+              </Stack>
+              <Span color="#646464" fontWeight="medium" fontSize="lg">
+                Beautiful and responsive React components to build your
+                application or marketing pages quicker.
+              </Span>
+            </Stack>
+            <Button
+              size="lg"
+              colorPalette="teal"
+              rounded="4px"
+              px="7"
+              w="fit-content"
+              asChild
+            >
+              <Link
+                href="https://discord.com/invite/chakra-ui"
+                external
+                unstyled
+              >
+                <span>Learn more</span>
+                <Icon asChild>
+                  <HiOutlineArrowNarrowRight />
+                </Icon>
+              </Link>
+            </Button>
+            <Image
+              src="/chakra-ui-ad.png"
+              alt="Chakra UI Pro Image"
+              layout="responsive"
+              width="1200"
+              height="320"
+            />
+          </Stack>
+        </Stack>
       </Flex>
       {/* Community */}
       <Flex align="center" maxW="8xl" mx="auto" pl="12" justify="space-between">
