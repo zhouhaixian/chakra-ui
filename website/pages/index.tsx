@@ -679,17 +679,6 @@ const HomePage = ({
   )
 }
 
-function chunk<T>(array: T[], size: number): T[][] {
-  return array.reduce((rows: T[][], currentValue: T, index: number) => {
-    if (index % size === 0) {
-      rows.push([currentValue])
-    } else {
-      rows[rows.length - 1].push(currentValue)
-    }
-    return rows
-  }, [] as T[][])
-}
-
 export async function getStaticProps() {
   const [
     { prettyCount: githubStars },
