@@ -3,6 +3,7 @@ import {
   Avatar,
   Box,
   Button,
+  Circle,
   Flex,
   Icon,
   IconButton,
@@ -13,6 +14,8 @@ import {
   Span,
   Stack,
   Text,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react"
 import Image from "next/image"
 import NextLink from "next/link"
@@ -250,45 +253,53 @@ export default async function Page() {
       </Flex>
 
       {/* Pro */}
-      <Stack px="8" pt="24" pb="16" gap="16" flex="1" maxW="8xl" mx="auto">
-        <Stack gap="16" align="center" textAlign="center">
-          <Stack gap="4">
-            <Stack gap="2">
-              <Span color="#12A594" fontWeight="semibold" fontSize="sm">
-                Premium
-              </Span>
-              <Span fontWeight="bold" fontSize="4xl">
-                Go faster. Go Pro.
-              </Span>
-            </Stack>
-            <Span color="#646464" fontWeight="medium" fontSize="lg">
-              Beautiful and responsive React components to build your
-              application or marketing pages quicker.
+      <Stack
+        gap="16"
+        align="center"
+        textAlign="center"
+        px="8"
+        pt="24"
+        pb="16"
+        flex="1"
+        maxW="8xl"
+        mx="auto"
+      >
+        <Stack gap="4">
+          <Stack gap="2">
+            <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              Premium
+            </Span>
+            <Span fontWeight="bold" fontSize="4xl">
+              Go faster. Go Pro.
             </Span>
           </Stack>
-          <Button
-            size="lg"
-            colorPalette="teal"
-            rounded="4px"
-            px="7"
-            w="fit-content"
-            asChild
-          >
-            <Link href="https://discord.com/invite/chakra-ui" external unstyled>
-              <span>Learn more</span>
-              <Icon asChild>
-                <HiOutlineArrowNarrowRight />
-              </Icon>
-            </Link>
-          </Button>
-          <Image
-            src="/chakra-ui-ad.png"
-            alt="Chakra UI Pro Image"
-            layout="responsive"
-            width="1200"
-            height="320"
-          />
+          <Span color="#646464" fontWeight="medium" fontSize="lg">
+            Beautiful and responsive React components to build your application
+            or marketing pages quicker.
+          </Span>
         </Stack>
+        <Button
+          size="lg"
+          colorPalette="teal"
+          rounded="4px"
+          px="7"
+          w="fit-content"
+          asChild
+        >
+          <Link href="https://discord.com/invite/chakra-ui" external unstyled>
+            <span>Learn more</span>
+            <Icon asChild>
+              <HiOutlineArrowNarrowRight />
+            </Icon>
+          </Link>
+        </Button>
+        <Image
+          src="/chakra-ui-ad.png"
+          alt="Chakra UI Pro Image"
+          layout="responsive"
+          width="1200"
+          height="320"
+        />
       </Stack>
 
       {/* Praise */}
@@ -414,6 +425,92 @@ export default async function Page() {
         </Stack>
       </Stack>
 
+      {/* Sponsor */}
+      <Stack
+        px="8"
+        py="32"
+        gap="16"
+        justify="center"
+        flex="1"
+        maxW="8xl"
+        mx="auto"
+      >
+        <Stack gap="4">
+          <Stack gap="2">
+            <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              Support
+            </Span>
+            <Span fontWeight="bold" fontSize="4xl">
+              Buy us a coffee
+            </Span>
+          </Stack>
+          <Span color="#646464" fontWeight="medium" fontSize="lg">
+            Our maintainers devote their time, effort, and heart to ensure
+            Chakra UI keeps getting better. <br />
+            Support us by donating to our collective 🙏
+          </Span>
+        </Stack>
+        <Stack gap="32">
+          {METAL_TIERS.map((t, i) => (
+            <Stack gap="4" key={t}>
+              <Span
+                fontSize="xl"
+                fontWeight="bold"
+                color={i !== 0 ? "#12A594" : "inherit"}
+              >
+                {t}
+              </Span>
+              <SponsorGroup
+                sponsors={stats.sponsors.companies.filter((c) =>
+                  i == 3 ? !METAL_TIERS.includes(c.tier) : c.tier === t,
+                )}
+              />
+            </Stack>
+          ))}
+        </Stack>
+
+        <Stack gap="8">
+          <Span fontWeight="bold" fontSize="xl">
+            Individual Sponsors
+          </Span>
+          <Wrap>
+            {stats.sponsors.individuals.map((i: any) => (
+              <WrapItem key={i.MemberId}>
+                <Circle
+                  size="10"
+                  bg="white"
+                  shadow="sm"
+                  {...(i.profile && {
+                    as: "a",
+                    href: i.profile,
+                    target: "_blank",
+                    rel: "noopener",
+                  })}
+                >
+                  <Box
+                    asChild
+                    rounded="full"
+                    cursor={i.profile ? "pointer" : "auto"}
+                    h="10"
+                    objectFit="contain"
+                  >
+                    <Image
+                      width={40}
+                      height={40}
+                      alt={i.name}
+                      title={i.name}
+                      key={i.MemberId}
+                      src={i.image}
+                      loading="lazy"
+                    />
+                  </Box>
+                </Circle>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Stack>
+      </Stack>
+
       {/* Community */}
       <Flex align="center" maxW="8xl" mx="auto" justify="space-between">
         <Stack px="8" gap="16">
@@ -485,3 +582,50 @@ function chunk<T>(array: T[], size: number): T[][] {
     return rows
   }, [] as T[][])
 }
+
+function SponsorGroup({ sponsors }: any) {
+  return (
+    <Wrap align="center" gap="4">
+      {sponsors.map((i: any) => (
+        <WrapItem key={i.MemberId}>
+          <Circle
+            size="20"
+            bg="white"
+            shadow="lg"
+            {...(i.website && {
+              as: "a",
+              href: i.website,
+              target: "_blank",
+              rel: "noopener",
+            })}
+          >
+            <Box
+              asChild
+              rounded="full"
+              cursor={i.website ? "pointer" : "auto"}
+              h="56px"
+              objectFit="contain"
+            >
+              <Image
+                width={56}
+                height={56}
+                alt={i.name}
+                title={i.name}
+                key={i.MemberId}
+                src={i.image}
+                loading="lazy"
+              />
+            </Box>
+          </Circle>
+        </WrapItem>
+      ))}
+    </Wrap>
+  )
+}
+
+const METAL_TIERS = [
+  "Gold Sponsor  🥇",
+  "Silver Sponsor 🥈",
+  "Bronze Sponsor 🥉",
+  "Backers 💚",
+]
