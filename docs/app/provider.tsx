@@ -22,6 +22,7 @@ const config = defineConfig({
     },
   },
 })
+
 export const system = createSystem(mergeConfigs(defaultConfig, config))
 
 export default function RootLayout(props: { children: React.ReactNode }) {
