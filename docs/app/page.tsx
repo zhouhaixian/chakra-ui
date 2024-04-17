@@ -26,6 +26,8 @@ import { AdBanner } from "../components/chakra-pro/ad-banner"
 import { ChargedIcon } from "../components/charged-icon"
 import { ColorModeToggle } from "../components/color-mode-toggle"
 import { CommunityGFX } from "../components/community-gfx"
+import { FreeLine } from "../components/free-line"
+import { FreeLine2 } from "../components/free-line-2"
 import {
   Accessible,
   Composable,
@@ -111,65 +113,70 @@ export default async function Page() {
         </Flex>
       </Flex>
 
-      {/* Features */}
-      <Stack px="8" py="16" gap="16" flex="1" maxW="8xl" mx="auto">
-        <Stack gap="16">
-          <Stack gap="4">
-            <Stack gap="2">
-              <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
-                Features
-              </Span>
-              <Span fontWeight="bold" fontSize="4xl">
-                Chakra packs a bunch of cool features
+      <Box pos="relative">
+        <FreeLine />
+        {/* Hero */}
+
+        {/* Features */}
+        <Stack px="8" py="16" gap="16" flex="1" maxW="8xl" mx="auto">
+          <Stack gap="16">
+            <Stack gap="4">
+              <Stack gap="2">
+                <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
+                  Features
+                </Span>
+                <Span fontWeight="bold" fontSize="4xl">
+                  Chakra packs a bunch of cool features
+                </Span>
+              </Stack>
+              <Span color="fg.muted" fontWeight="medium" fontSize="lg">
+                Spend less time writing UI code and more time building a great
+                experience for your customers.
               </Span>
             </Stack>
-            <Span color="fg.muted" fontWeight="medium" fontSize="lg">
-              Spend less time writing UI code and more time building a great
-              experience for your customers.
-            </Span>
-          </Stack>
 
-          <Stack>
-            <Tabs.Root
-              defaultValue={FEATURES[0].label}
-              colorPalette="teal"
-              mt="3"
-              minW="300px"
-              display="flex"
-              flexDir="column"
-              gap="8"
-            >
-              <Tabs.List borderColor="transparent">
-                {FEATURES.map((f) => (
-                  <Tabs.Trigger
-                    value={f.label}
-                    key={f.label}
-                    px={{ base: "4", md: "10" }}
-                    py={{ base: "2", md: "4" }}
-                    fontWeight="semibold"
-                    cursor="pointer"
-                    asChild
-                  >
-                    <Stack gap="2">
-                      <Icon asChild boxSize="8">
-                        {f.icon}
-                      </Icon>
-                      {f.label}
-                    </Stack>
-                  </Tabs.Trigger>
-                ))}
-              </Tabs.List>
-              <Tabs.ContentGroup>
-                {FEATURES.map((f) => (
-                  <Tabs.Content value={f.label} padding="2" key={f.label}>
-                    <Text fontSize="sm">{f.label}</Text>
-                  </Tabs.Content>
-                ))}
-              </Tabs.ContentGroup>
-            </Tabs.Root>
+            <Stack>
+              <Tabs.Root
+                defaultValue={FEATURES[0].label}
+                colorPalette="teal"
+                mt="3"
+                minW="300px"
+                display="flex"
+                flexDir="column"
+                gap="8"
+              >
+                <Tabs.List borderColor="transparent">
+                  {FEATURES.map((f) => (
+                    <Tabs.Trigger
+                      value={f.label}
+                      key={f.label}
+                      px={{ base: "4", md: "10" }}
+                      py={{ base: "2", md: "4" }}
+                      fontWeight="semibold"
+                      cursor="pointer"
+                      asChild
+                    >
+                      <Stack gap="2">
+                        <Icon asChild boxSize="8">
+                          {f.icon}
+                        </Icon>
+                        {f.label}
+                      </Stack>
+                    </Tabs.Trigger>
+                  ))}
+                </Tabs.List>
+                <Tabs.ContentGroup>
+                  {FEATURES.map((f) => (
+                    <Tabs.Content value={f.label} padding="2" key={f.label}>
+                      <Text fontSize="sm">{f.label}</Text>
+                    </Tabs.Content>
+                  ))}
+                </Tabs.ContentGroup>
+              </Tabs.Root>
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
+      </Box>
 
       {/* Case studies */}
       <Stack
@@ -348,193 +355,198 @@ export default async function Page() {
         <StatsGFX />
       </Flex>
 
-      {/* Pro */}
-      <Stack
-        gap="16"
-        align="center"
-        textAlign="center"
-        px="8"
-        pt={{ base: "12", lg: "24" }}
-        pb="16"
-        flex="1"
-        maxW="8xl"
-        mx="auto"
-      >
-        <Stack gap="4">
-          <Stack gap="2">
-            <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
-              Premium
-            </Span>
-            <Span fontWeight="bold" fontSize="4xl">
-              Go faster. Go Pro.
-            </Span>
-          </Stack>
-          <Span color="fg.muted" fontWeight="medium" fontSize="lg">
-            Beautiful and responsive React components to build your application
-            or marketing pages quicker.
-          </Span>
-        </Stack>
-        <Button
-          size="lg"
-          colorPalette="teal"
-          rounded="4px"
-          px="7"
-          w="fit-content"
-          asChild
-        >
-          <Link
-            href="https://pro.chakra-ui.com/?utm_source=chakra-ui.com&utm_medium=homepage-ad"
-            external
-            unstyled
-          >
-            <span>Learn more</span>
-            <Icon asChild>
-              <HiOutlineArrowNarrowRight />
-            </Icon>
-          </Link>
-        </Button>
-        <Image
-          src="/chakra-ui-ad.png"
-          alt="Chakra UI Pro Image"
-          layout="responsive"
-          width="1200"
-          height="320"
-        />
-      </Stack>
+      <Box pos="relative">
+        <FreeLine2 />
 
-      {/* Praise */}
-      <Stack px="8" gap="16" flex="1" maxW="8xl" mx="auto" py="24">
-        <Stack gap="16" align="center" textAlign="center">
+        {/* Pro */}
+        <Stack
+          gap="16"
+          align="center"
+          textAlign="center"
+          px="8"
+          pt={{ base: "12", lg: "24" }}
+          pb="16"
+          flex="1"
+          maxW="8xl"
+          mx="auto"
+        >
           <Stack gap="4">
             <Stack gap="2">
               <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
-                Praise
+                Premium
               </Span>
               <Span fontWeight="bold" fontSize="4xl">
-                Loved by product people like you
+                Go faster. Go Pro.
               </Span>
             </Stack>
             <Span color="fg.muted" fontWeight="medium" fontSize="lg">
-              The proof is in the praise.
+              Beautiful and responsive React components to build your
+              application or marketing pages quicker.
             </Span>
           </Stack>
-          <SimpleGrid
-            gap="2"
-            minH="1180px"
-            w="full"
-            columns={{ base: 1, lg: 3 }}
+          <Button
+            size="lg"
+            colorPalette="teal"
+            rounded="4px"
+            px="7"
+            w="fit-content"
+            asChild
           >
-            {/* Masonry grid */}
-            {chunk(tweets.tweets, 3).map((list, i1) => {
-              const span = [
-                [62, 22, 16],
-                [26, 31, 43],
-                [45, 32, 23],
-              ]
-              return (
-                <Stack gap="2" key={i1}>
-                  {list.map(({ name, handle, content, url }, i) => (
-                    <Flex
-                      key={i}
-                      borderRadius="8px"
-                      gap="4"
-                      h={{ base: "auto", lg: span[i1][i] + "%" }}
-                      border="solid 1px"
-                      borderColor={{ base: "gray.200", _dark: "gray.800" }}
-                      direction="column"
-                      justify="space-between"
-                      align="start"
-                      p="8"
-                      data-c1={i1 == 0 && i == 0 ? "" : undefined}
-                      data-c2={i1 == 1 && i == 2 ? "" : undefined}
-                      data-c3={i1 == 2 && i == 0 ? "" : undefined}
-                      lg={{
-                        "&:not([data-c1], [data-c2], [data-c3]) .charged": {
-                          display: "none",
-                        },
-                        "&:not([data-c1], [data-c2], [data-c3]) .content": {
-                          fontSize: "sm",
-                        },
-
-                        "&:is([data-c1], [data-c2], [data-c3]) .content": {
-                          fontWeight: "semibold",
-                        },
-
-                        "&[data-c1]": {
-                          borderColor: "teal.500",
-                          bg: "teal.500",
-                          "& *": {
-                            color: "white",
-                          },
-                        },
-                        "&:is([data-c2], [data-c3])": {
-                          borderColor: "teal.500",
-                          bg: { _dark: "#191919" },
-                          "& .content, & .name": {
-                            color: "fg",
-                          },
-                          "& .charged": {
-                            color: "fg.accent",
-                          },
-                        },
-                      }}
-                      lgDown={{
-                        "& .charged": {
-                          display: "none",
-                        },
-                      }}
-                      asChild
-                    >
-                      <a href={url} target="_blank" rel="noreferrer">
-                        <Flex direction="column" gap="16">
-                          <ChargedIcon />
-                          <Box
-                            as="p"
-                            mt="2"
-                            textAlign="start"
-                            color="fg.muted"
-                            className="content"
-                            dangerouslySetInnerHTML={{
-                              __html: content.replace(/--/g, "<br /><br />"),
-                            }}
-                          />
-                        </Flex>
-                        <Flex gap="4" align="center">
-                          <Span
-                            display="inline-flex"
-                            alignItems="center"
-                            flexShrink="0"
-                            width="12"
-                            height="12"
-                            position="relative"
-                            rounded="full"
-                            overflow="clip"
-                          >
-                            <Image
-                              alt={name}
-                              fill
-                              src={`/avatars/${handle}.jpg`}
-                              loading="lazy"
-                            />
-                          </Span>
-                          <Stack align="start" gap="1">
-                            <Span fontWeight="semibold" className="name">
-                              {name}
-                            </Span>
-                            <Span className="handle" color="fg.muted">
-                              {handle}
-                            </Span>
-                          </Stack>
-                        </Flex>
-                      </a>
-                    </Flex>
-                  ))}
-                </Stack>
-              )
-            })}
-          </SimpleGrid>
+            <Link
+              href="https://pro.chakra-ui.com/?utm_source=chakra-ui.com&utm_medium=homepage-ad"
+              external
+              unstyled
+            >
+              <span>Learn more</span>
+              <Icon asChild>
+                <HiOutlineArrowNarrowRight />
+              </Icon>
+            </Link>
+          </Button>
+          <Image
+            src="/chakra-ui-ad.png"
+            alt="Chakra UI Pro Image"
+            layout="responsive"
+            width="1200"
+            height="320"
+          />
         </Stack>
-      </Stack>
+
+        {/* Praise */}
+        <Stack px="8" gap="16" flex="1" maxW="8xl" mx="auto" py="24">
+          <Stack gap="16" align="center" textAlign="center">
+            <Stack gap="4">
+              <Stack gap="2">
+                <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
+                  Praise
+                </Span>
+                <Span fontWeight="bold" fontSize="4xl">
+                  Loved by product people like you
+                </Span>
+              </Stack>
+              <Span color="fg.muted" fontWeight="medium" fontSize="lg">
+                The proof is in the praise.
+              </Span>
+            </Stack>
+            <SimpleGrid
+              gap="2"
+              minH="1180px"
+              w="full"
+              columns={{ base: 1, lg: 3 }}
+            >
+              {/* Masonry grid */}
+              {chunk(tweets.tweets, 3).map((list, i1) => {
+                const span = [
+                  [62, 22, 16],
+                  [26, 31, 43],
+                  [45, 32, 23],
+                ]
+                return (
+                  <Stack gap="2" key={i1}>
+                    {list.map(({ name, handle, content, url }, i) => (
+                      <Flex
+                        key={i}
+                        borderRadius="8px"
+                        gap="4"
+                        h={{ base: "auto", lg: span[i1][i] + "%" }}
+                        border="solid 1px"
+                        borderColor={{ base: "gray.200", _dark: "gray.800" }}
+                        direction="column"
+                        justify="space-between"
+                        align="start"
+                        p="8"
+                        bg="bg"
+                        data-c1={i1 == 0 && i == 0 ? "" : undefined}
+                        data-c2={i1 == 1 && i == 2 ? "" : undefined}
+                        data-c3={i1 == 2 && i == 0 ? "" : undefined}
+                        lg={{
+                          "&:not([data-c1], [data-c2], [data-c3]) .charged": {
+                            display: "none",
+                          },
+                          "&:not([data-c1], [data-c2], [data-c3]) .content": {
+                            fontSize: "sm",
+                          },
+
+                          "&:is([data-c1], [data-c2], [data-c3]) .content": {
+                            fontWeight: "semibold",
+                          },
+
+                          "&[data-c1]": {
+                            borderColor: "teal.500",
+                            bg: "teal.500",
+                            "& *": {
+                              color: "white",
+                            },
+                          },
+                          "&:is([data-c2], [data-c3])": {
+                            borderColor: "teal.500",
+                            bg: { _dark: "#191919" },
+                            "& .content, & .name": {
+                              color: "fg",
+                            },
+                            "& .charged": {
+                              color: "fg.accent",
+                            },
+                          },
+                        }}
+                        lgDown={{
+                          "& .charged": {
+                            display: "none",
+                          },
+                        }}
+                        asChild
+                      >
+                        <a href={url} target="_blank" rel="noreferrer">
+                          <Flex direction="column" gap="16">
+                            <ChargedIcon />
+                            <Box
+                              as="p"
+                              mt="2"
+                              textAlign="start"
+                              color="fg.muted"
+                              className="content"
+                              dangerouslySetInnerHTML={{
+                                __html: content.replace(/--/g, "<br /><br />"),
+                              }}
+                            />
+                          </Flex>
+                          <Flex gap="4" align="center">
+                            <Span
+                              display="inline-flex"
+                              alignItems="center"
+                              flexShrink="0"
+                              width="12"
+                              height="12"
+                              position="relative"
+                              rounded="full"
+                              overflow="clip"
+                            >
+                              <Image
+                                alt={name}
+                                fill
+                                src={`/avatars/${handle}.jpg`}
+                                loading="lazy"
+                              />
+                            </Span>
+                            <Stack align="start" gap="1">
+                              <Span fontWeight="semibold" className="name">
+                                {name}
+                              </Span>
+                              <Span className="handle" color="fg.muted">
+                                {handle}
+                              </Span>
+                            </Stack>
+                          </Flex>
+                        </a>
+                      </Flex>
+                    ))}
+                  </Stack>
+                )
+              })}
+            </SimpleGrid>
+          </Stack>
+        </Stack>
+      </Box>
 
       {/* Sponsor */}
       <Stack
