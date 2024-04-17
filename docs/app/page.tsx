@@ -88,8 +88,8 @@ export default async function Page() {
             )}
           </Flex>
           <Flex flex="1" justify="end" align="center" gap="8">
-            <Button size="sm" colorPalette="teal" fontWeight="semibold">
-              Get Started
+            <Button size="sm" colorPalette="teal" fontWeight="semibold" asChild>
+              <NextLink href="/getting-started">Get Started</NextLink>
             </Button>
             <Flex gap="4" align="center">
               <IconButton
@@ -382,7 +382,11 @@ export default async function Page() {
           w="fit-content"
           asChild
         >
-          <Link href="https://discord.com/invite/chakra-ui" external unstyled>
+          <Link
+            href="https://pro.chakra-ui.com/?utm_source=chakra-ui.com&utm_medium=homepage-ad"
+            external
+            unstyled
+          >
             <span>Learn more</span>
             <Icon asChild>
               <HiOutlineArrowNarrowRight />
