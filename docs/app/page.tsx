@@ -116,14 +116,14 @@ export default async function Page() {
         <Stack gap="16">
           <Stack gap="4">
             <Stack gap="2">
-              <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
                 Features
               </Span>
               <Span fontWeight="bold" fontSize="4xl">
                 Chakra packs a bunch of cool features
               </Span>
             </Stack>
-            <Span color="#646464" fontWeight="medium" fontSize="lg">
+            <Span color="fg.muted" fontWeight="medium" fontSize="lg">
               Spend less time writing UI code and more time building a great
               experience for your customers.
             </Span>
@@ -182,14 +182,14 @@ export default async function Page() {
       >
         <Stack gap="4">
           <Stack gap="2">
-            <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+            <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
               Case Studies
             </Span>
             <Span fontWeight="bold" fontSize="4xl">
               Built with Chakra
             </Span>
           </Stack>
-          <Span color="#646464" fontWeight="medium" fontSize="lg">
+          <Span color="fg.muted" fontWeight="medium" fontSize="lg">
             Your project can look as good as these! Check them out
           </Span>
         </Stack>
@@ -272,14 +272,14 @@ export default async function Page() {
         <Stack px="8" py="32" gap="16" justify="center" flex="1">
           <Stack gap="4">
             <Stack gap="2">
-              <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
                 Stats
               </Span>
               <Span fontWeight="bold" fontSize="4xl">
                 Chakra is growing quickly
               </Span>
             </Stack>
-            <Span color="#646464" fontWeight="medium" fontSize="lg">
+            <Span color="fg.muted" fontWeight="medium" fontSize="lg">
               We're dedicated to improving the experience and performance of
               Chakra UI.
             </Span>
@@ -323,7 +323,7 @@ export default async function Page() {
                     <Icon asChild boxSize="6">
                       <stat.icon />
                     </Icon>
-                    <Span fontWeight="medium" color="#646464">
+                    <Span fontWeight="medium" color="fg.muted">
                       {stat.description}
                     </Span>
                   </Flex>
@@ -362,14 +362,14 @@ export default async function Page() {
       >
         <Stack gap="4">
           <Stack gap="2">
-            <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+            <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
               Premium
             </Span>
             <Span fontWeight="bold" fontSize="4xl">
               Go faster. Go Pro.
             </Span>
           </Stack>
-          <Span color="#646464" fontWeight="medium" fontSize="lg">
+          <Span color="fg.muted" fontWeight="medium" fontSize="lg">
             Beautiful and responsive React components to build your application
             or marketing pages quicker.
           </Span>
@@ -403,14 +403,14 @@ export default async function Page() {
         <Stack gap="16" align="center" textAlign="center">
           <Stack gap="4">
             <Stack gap="2">
-              <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
                 Praise
               </Span>
               <Span fontWeight="bold" fontSize="4xl">
                 Loved by product people like you
               </Span>
             </Stack>
-            <Span color="#646464" fontWeight="medium" fontSize="lg">
+            <Span color="fg.muted" fontWeight="medium" fontSize="lg">
               The proof is in the praise.
             </Span>
           </Stack>
@@ -435,7 +435,8 @@ export default async function Page() {
                       borderRadius="8px"
                       gap="4"
                       h={{ base: "auto", lg: span[i1][i] + "%" }}
-                      border="solid 1.5px #E0E0E0"
+                      border="solid 1px"
+                      borderColor={{ base: "gray.200", _dark: "gray.800" }}
                       direction="column"
                       justify="space-between"
                       align="start"
@@ -451,24 +452,25 @@ export default async function Page() {
                           fontSize: "sm",
                         },
 
+                        "&:is([data-c1], [data-c2], [data-c3]) .content": {
+                          fontWeight: "semibold",
+                        },
+
                         "&[data-c1]": {
-                          borderColor: "#12A594",
-                          bg: "#12A594",
+                          borderColor: "teal.500",
+                          bg: "teal.500",
                           "& *": {
                             color: "white",
                           },
-                          "& .content": {
-                            fontWeight: "semibold",
-                          },
                         },
-                        "&:is([data-c2], [data-c2])": {
-                          borderColor: "#12A594",
-                          "& .charged": {
-                            color: "#12A594",
+                        "&:is([data-c2], [data-c3])": {
+                          borderColor: "teal.500",
+                          bg: { _dark: "#191919" },
+                          "& .content, & .name": {
+                            color: "fg",
                           },
-                          "& .content": {
-                            fontWeight: "semibold",
-                            color: "black",
+                          "& .charged": {
+                            color: "fg.accent",
                           },
                         },
                       }}
@@ -486,7 +488,7 @@ export default async function Page() {
                             as="p"
                             mt="2"
                             textAlign="start"
-                            color="#646464"
+                            color="fg.muted"
                             className="content"
                             dangerouslySetInnerHTML={{
                               __html: content.replace(/--/g, "<br /><br />"),
@@ -512,14 +514,12 @@ export default async function Page() {
                             />
                           </Span>
                           <Stack align="start" gap="1">
-                            <Span
-                              fontWeight="semibold"
-                              color="black"
-                              className="name"
-                            >
+                            <Span fontWeight="semibold" className="name">
                               {name}
                             </Span>
-                            <Span color="#646464">{handle}</Span>
+                            <Span className="handle" color="fg.muted">
+                              {handle}
+                            </Span>
                           </Stack>
                         </Flex>
                       </a>
@@ -544,14 +544,14 @@ export default async function Page() {
       >
         <Stack gap="4">
           <Stack gap="2">
-            <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+            <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
               Support
             </Span>
             <Span fontWeight="bold" fontSize="4xl">
               Buy us a coffee
             </Span>
           </Stack>
-          <Span color="#646464" fontWeight="medium" fontSize="lg">
+          <Span color="fg.muted" fontWeight="medium" fontSize="lg">
             Our maintainers devote their time, effort, and heart to ensure
             Chakra UI keeps getting better. <br />
             Support us by donating to our collective 🙏
@@ -563,7 +563,7 @@ export default async function Page() {
               <Span
                 fontSize="xl"
                 fontWeight="bold"
-                color={i !== 0 ? "#12A594" : "inherit"}
+                color={i !== 0 ? "fg.accent" : "inherit"}
               >
                 {t}
               </Span>
@@ -585,7 +585,7 @@ export default async function Page() {
               <WrapItem key={i.MemberId}>
                 <Circle
                   size="10"
-                  bg="white"
+                  bg="bg.panel"
                   shadow="sm"
                   {...(i.profile && {
                     as: "a",
@@ -623,14 +623,14 @@ export default async function Page() {
         <Stack px="8" gap="16">
           <Stack gap="4">
             <Stack gap="2">
-              <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              <Span color="fg.accent" fontWeight="semibold" fontSize="sm">
                 Connect
               </Span>
               <Span fontWeight="bold" fontSize="4xl">
                 Meet the people
               </Span>
             </Stack>
-            <Span color="#646464" fontWeight="medium" fontSize="lg">
+            <Span color="fg.muted" fontWeight="medium" fontSize="lg">
               Feel free to ask questions, report issues, and meet new people.
             </Span>
           </Stack>
@@ -690,7 +690,7 @@ export default async function Page() {
               </Link>
             ))}
           </Flex>
-          <Span color="#838383">© 2024 Chakra UI. All rights reserved.</Span>
+          <Span color="fg.muted">© 2024 Chakra UI. All rights reserved.</Span>
         </Flex>
       </Flex>
     </Box>
@@ -715,7 +715,7 @@ function SponsorGroup({ sponsors }: any) {
         <WrapItem key={i.MemberId}>
           <Circle
             size="20"
-            bg="white"
+            bg="bg.panel"
             shadow="lg"
             {...(i.website && {
               as: "a",
