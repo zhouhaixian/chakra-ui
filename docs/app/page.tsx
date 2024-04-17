@@ -13,6 +13,7 @@ import {
   SimpleGrid,
   Span,
   Stack,
+  Tabs,
   Text,
   Wrap,
   WrapItem,
@@ -25,6 +26,12 @@ import { AdBanner } from "../components/chakra-pro/ad-banner"
 import { ChargedIcon } from "../components/charged-icon"
 import { ColorModeToggle } from "../components/color-mode-toggle"
 import { CommunityGFX } from "../components/community-gfx"
+import {
+  Accessible,
+  Composable,
+  LightAndDark,
+  Themeable,
+} from "../components/icons"
 import { Logo, LogoIcon } from "../components/logo"
 import { StatsGFX } from "../components/stats-gfx"
 import json from "../configs/showcase.json"
@@ -43,19 +50,37 @@ export default async function Page() {
 
       {/* NavBar */}
       <Flex align="center" py="6" maxW="8xl" mx="auto">
-        <Flex align="center" px="8" flex="1">
+        <Flex
+          align="center"
+          px="8"
+          flex="1"
+          mdDown={{
+            flexWrap: "wrap",
+            gap: "6",
+          }}
+        >
           <Flex flex="1">
             <NextLink href="/">
               <Logo />
             </NextLink>
           </Flex>
-          <Flex flex="1" justify="center" align="center" gap="6">
+          <Flex
+            flex="1"
+            justify="center"
+            align="center"
+            gap="6"
+            mdDown={{
+              order: "2",
+              flexBasis: "full",
+              justifyContent: "space-between",
+            }}
+          >
             {["Docs", "Components", "Documents", "Resources", "Projects"].map(
               (l, i) => (
                 <Link
                   data-selected={i == 0 ? "" : undefined}
                   key={i}
-                  fontWeight={{ base: "medium", _selected: "semibold" }}
+                  fontWeight={{ base: "medium", _selected: "bold" }}
                 >
                   {l}
                 </Link>
@@ -86,94 +111,164 @@ export default async function Page() {
         </Flex>
       </Flex>
 
-      {/* Case studies */}
-      <Stack px="8" pt="32" gap="16" flex="1" maxW="8xl" mx="auto">
+      {/* Features */}
+      <Stack px="8" py="16" gap="16" flex="1" maxW="8xl" mx="auto">
         <Stack gap="16">
           <Stack gap="4">
             <Stack gap="2">
               <Span color="#12A594" fontWeight="semibold" fontSize="sm">
-                Case Studies
+                Features
               </Span>
               <Span fontWeight="bold" fontSize="4xl">
-                Built with Chakra
+                Chakra packs a bunch of cool features
               </Span>
             </Stack>
             <Span color="#646464" fontWeight="medium" fontSize="lg">
-              Your project can look as good as these! Check them out
+              Spend less time writing UI code and more time building a great
+              experience for your customers.
             </Span>
           </Stack>
-          <Button
-            size="lg"
-            colorPalette="teal"
-            rounded="4px"
-            px="7"
-            w="fit-content"
-            asChild
-          >
-            <Link href="/showcase" external unstyled>
-              <span>View Showcases</span>
-              <Icon asChild>
-                <HiOutlineArrowNarrowRight />
-              </Icon>
-            </Link>
-          </Button>
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="8" w="full">
-            {websites.map(({ name, image, url }) => (
-              <LinkBox
-                cursor="pointer"
-                pos="relative"
-                key={url}
-                shadow={{ base: "xs", _hover: "lg" }}
-                transition="all 0.2s ease"
-                rounded="lg"
-                overflow="clip"
-              >
-                <AspectRatio ratio={16 / 9} w="full">
-                  <Image
-                    height={200}
-                    width={300}
-                    alt={name}
-                    style={{ objectFit: "cover" }}
-                    src={
-                      image
-                        ? /^(https|http)/.test(image)
-                          ? image
-                          : `/${image}`
-                        : "/og-image.png"
-                    }
-                  />
-                </AspectRatio>
-                <LinkOverlay href={url} external>
-                  <Text
+
+          <Stack>
+            <Tabs.Root
+              defaultValue={FEATURES[0].label}
+              colorPalette="teal"
+              mt="3"
+              minW="300px"
+              display="flex"
+              flexDir="column"
+              gap="8"
+            >
+              <Tabs.List borderColor="transparent">
+                {FEATURES.map((f) => (
+                  <Tabs.Trigger
+                    value={f.label}
+                    key={f.label}
+                    px={{ base: "4", md: "10" }}
+                    py={{ base: "2", md: "4" }}
                     fontWeight="semibold"
-                    textAlign="start"
-                    fontSize={{ base: "sm", md: "md" }}
-                    pos="absolute"
-                    bottom="4"
-                    right="4"
-                    shadow="md"
-                    rounded="full"
-                    display="flex"
-                    gap="3"
-                    alignItems="center"
-                    px="2"
-                    py="1.5"
-                    bg="bg"
+                    cursor="pointer"
+                    asChild
                   >
-                    {name}
-                    <Icon asChild boxSize="6">
-                      <HiOutlineArrowNarrowRight />
-                    </Icon>
-                  </Text>
-                </LinkOverlay>
-              </LinkBox>
-            ))}
-          </SimpleGrid>
+                    <Stack gap="2">
+                      <Icon asChild boxSize="8">
+                        {f.icon}
+                      </Icon>
+                      {f.label}
+                    </Stack>
+                  </Tabs.Trigger>
+                ))}
+              </Tabs.List>
+              <Tabs.ContentGroup>
+                {FEATURES.map((f) => (
+                  <Tabs.Content value={f.label} padding="2" key={f.label}>
+                    <Text fontSize="sm">{f.label}</Text>
+                  </Tabs.Content>
+                ))}
+              </Tabs.ContentGroup>
+            </Tabs.Root>
+          </Stack>
         </Stack>
       </Stack>
 
+      {/* Case studies */}
+      <Stack
+        gap="16"
+        flex="1"
+        maxW="8xl"
+        mx="auto"
+        px="8"
+        pt={{ base: "12", lg: "32" }}
+      >
+        <Stack gap="4">
+          <Stack gap="2">
+            <Span color="#12A594" fontWeight="semibold" fontSize="sm">
+              Case Studies
+            </Span>
+            <Span fontWeight="bold" fontSize="4xl">
+              Built with Chakra
+            </Span>
+          </Stack>
+          <Span color="#646464" fontWeight="medium" fontSize="lg">
+            Your project can look as good as these! Check them out
+          </Span>
+        </Stack>
+        <Button
+          size="lg"
+          colorPalette="teal"
+          rounded="4px"
+          px="7"
+          w="fit-content"
+          asChild
+        >
+          <Link href="/showcase" external unstyled>
+            <span>View Showcases</span>
+            <Icon asChild>
+              <HiOutlineArrowNarrowRight />
+            </Icon>
+          </Link>
+        </Button>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="8" w="full">
+          {websites.map(({ name, image, url }) => (
+            <LinkBox
+              cursor="pointer"
+              pos="relative"
+              key={url}
+              shadow={{ base: "xs", _hover: "lg" }}
+              transition="all 0.2s ease"
+              rounded="lg"
+              overflow="clip"
+            >
+              <AspectRatio ratio={16 / 9} w="full">
+                <Image
+                  height={200}
+                  width={300}
+                  alt={name}
+                  style={{ objectFit: "cover" }}
+                  src={
+                    image
+                      ? /^(https|http)/.test(image)
+                        ? image
+                        : `/${image}`
+                      : "/og-image.png"
+                  }
+                />
+              </AspectRatio>
+              <LinkOverlay href={url} external>
+                <Text
+                  fontWeight="semibold"
+                  textAlign="start"
+                  fontSize={{ base: "sm", md: "md" }}
+                  pos="absolute"
+                  bottom="4"
+                  right="4"
+                  shadow="md"
+                  rounded="full"
+                  display="flex"
+                  gap="3"
+                  alignItems="center"
+                  px="2"
+                  py="1.5"
+                  bg="bg"
+                >
+                  {name}
+                  <Icon asChild boxSize="6">
+                    <HiOutlineArrowNarrowRight />
+                  </Icon>
+                </Text>
+              </LinkOverlay>
+            </LinkBox>
+          ))}
+        </SimpleGrid>
+      </Stack>
+
       {/* Stats */}
-      <Flex maxW="8xl" mx="auto" pt="32" direction="column">
+      <Flex
+        maxW="8xl"
+        mx="auto"
+        pt={{ base: "16", lg: "32" }}
+        direction="column"
+      >
         <Stack px="8" py="32" gap="16" justify="center" flex="1">
           <Stack gap="4">
             <Stack gap="2">
@@ -189,7 +284,10 @@ export default async function Page() {
               Chakra UI.
             </Span>
           </Stack>
-          <Flex gap="32">
+          <SimpleGrid
+            gap={{ base: "8", lg: "32" }}
+            columns={{ base: 2, lg: 4 }}
+          >
             {[
               {
                 description: "Downloads per month",
@@ -212,8 +310,6 @@ export default async function Page() {
                 count: stats.discordMembers,
               },
             ].map((stat) => {
-              console.log(stat.count)
-
               const count = splitNumUnit(stat.count)
               return (
                 <Stack gap="1" key={stat.description}>
@@ -234,7 +330,7 @@ export default async function Page() {
                 </Stack>
               )
             })}
-          </Flex>
+          </SimpleGrid>
           <Stack gap="8">
             <Span fontWeight="bold" fontSize="xl">
               Our Heroes
@@ -258,7 +354,7 @@ export default async function Page() {
         align="center"
         textAlign="center"
         px="8"
-        pt="24"
+        pt={{ base: "12", lg: "24" }}
         pb="16"
         flex="1"
         maxW="8xl"
@@ -318,7 +414,12 @@ export default async function Page() {
               The proof is in the praise.
             </Span>
           </Stack>
-          <SimpleGrid gap="2" h="1180px" w="full" columns={3}>
+          <SimpleGrid
+            gap="2"
+            minH="1180px"
+            w="full"
+            columns={{ base: 1, lg: 3 }}
+          >
             {/* Masonry grid */}
             {chunk(tweets.tweets, 3).map((list, i1) => {
               const span = [
@@ -332,7 +433,8 @@ export default async function Page() {
                     <Flex
                       key={i}
                       borderRadius="8px"
-                      h={span[i1][i] + "%"}
+                      gap="4"
+                      h={{ base: "auto", lg: span[i1][i] + "%" }}
                       border="solid 1.5px #E0E0E0"
                       direction="column"
                       justify="space-between"
@@ -341,7 +443,7 @@ export default async function Page() {
                       data-c1={i1 == 0 && i == 0 ? "" : undefined}
                       data-c2={i1 == 1 && i == 2 ? "" : undefined}
                       data-c3={i1 == 2 && i == 0 ? "" : undefined}
-                      css={{
+                      lg={{
                         "&:not([data-c1], [data-c2], [data-c3]) .charged": {
                           display: "none",
                         },
@@ -368,6 +470,11 @@ export default async function Page() {
                             fontWeight: "semibold",
                             color: "black",
                           },
+                        },
+                      }}
+                      lgDown={{
+                        "& .charged": {
+                          display: "none",
                         },
                       }}
                       asChild
@@ -428,7 +535,7 @@ export default async function Page() {
       {/* Sponsor */}
       <Stack
         px="8"
-        py="32"
+        py={{ base: "16", lg: "32" }}
         gap="16"
         justify="center"
         flex="1"
@@ -450,7 +557,7 @@ export default async function Page() {
             Support us by donating to our collective 🙏
           </Span>
         </Stack>
-        <Stack gap="32">
+        <Stack gap={{ base: "16", lg: "32" }}>
           {METAL_TIERS.map((t, i) => (
             <Stack gap="4" key={t}>
               <Span
@@ -540,13 +647,23 @@ export default async function Page() {
             </Link>
           </Button>
         </Stack>
-        <Flex>
+        <Flex hideBelow="md">
           <CommunityGFX />
         </Flex>
       </Flex>
 
       {/* Footer */}
-      <Flex align="center" px="8" gap="8" flex="1" py="6" maxW="8xl" mx="auto">
+      <Flex
+        align="center"
+        px="8"
+        gap="8"
+        flex="1"
+        pt="20"
+        pb="6"
+        maxW="8xl"
+        mx="auto"
+        mdDown={{ flexDir: "column" }}
+      >
         <Flex w="20" justify="center">
           <NextLink href="/">
             <LogoIcon />
@@ -559,12 +676,20 @@ export default async function Page() {
             </Link>
           ))}
         </Flex>
-        <Flex flex="1" justify="end" align="center" gap="8">
-          {["Terms", "Privacy", "Cookies", "Contact"].map((l, i) => (
-            <Link key={i} fontWeight="semibold">
-              {l}
-            </Link>
-          ))}
+        <Flex
+          flex="1"
+          justify="end"
+          align="center"
+          gap="8"
+          mdDown={{ flexDir: "column" }}
+        >
+          <Flex align="center" gap="8">
+            {["Terms", "Privacy", "Cookies", "Contact"].map((l, i) => (
+              <Link key={i} fontWeight="semibold">
+                {l}
+              </Link>
+            ))}
+          </Flex>
           <Span color="#838383">© 2024 Chakra UI. All rights reserved.</Span>
         </Flex>
       </Flex>
@@ -628,4 +753,23 @@ const METAL_TIERS = [
   "Silver Sponsor 🥈",
   "Bronze Sponsor 🥉",
   "Backers 💚",
+]
+
+const FEATURES = [
+  {
+    label: "Accessible",
+    icon: <Accessible />,
+  },
+  {
+    label: "Themeable",
+    icon: <Themeable />,
+  },
+  {
+    label: "Composable",
+    icon: <Composable />,
+  },
+  {
+    label: "Light & Dark Mode",
+    icon: <LightAndDark />,
+  },
 ]

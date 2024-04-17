@@ -5,7 +5,7 @@ export const StatsGFX = () => (
     viewBox="0 0 1440 375"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ marginTop: "-16rem" }}
+    style={{ marginTop: "-16rem", maxWidth: "100%" }}
   >
     <g clipPath="url(#clip0_476_13696)">
       <mask
