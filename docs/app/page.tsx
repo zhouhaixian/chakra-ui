@@ -26,6 +26,7 @@ import { AdBanner } from "../components/chakra-pro/ad-banner"
 import { ChargedIcon } from "../components/charged-icon"
 import { ColorModeToggle } from "../components/color-mode-toggle"
 import { CommunityGFX } from "../components/community-gfx"
+import { Features } from "../components/features"
 import { FreeLine } from "../components/free-line"
 import { FreeLine2 } from "../components/free-line-2"
 import {
@@ -137,7 +138,7 @@ export default async function Page() {
 
             <Stack>
               <Tabs.Root
-                defaultValue={FEATURES[0].label}
+                defaultValue={FEATURES[0].id}
                 colorPalette="teal"
                 mt="3"
                 minW="300px"
@@ -148,8 +149,8 @@ export default async function Page() {
                 <Tabs.List borderColor="transparent">
                   {FEATURES.map((f) => (
                     <Tabs.Trigger
-                      value={f.label}
-                      key={f.label}
+                      value={f.id}
+                      key={f.id}
                       px={{ base: "4", md: "10" }}
                       py={{ base: "2", md: "4" }}
                       fontWeight="semibold"
@@ -167,8 +168,8 @@ export default async function Page() {
                 </Tabs.List>
                 <Tabs.ContentGroup>
                   {FEATURES.map((f) => (
-                    <Tabs.Content value={f.label} padding="2" key={f.label}>
-                      <Text fontSize="sm">{f.label}</Text>
+                    <Tabs.Content value={f.id} padding="2" key={f.id}>
+                      <Features id={f.id} />
                     </Tabs.Content>
                   ))}
                 </Tabs.ContentGroup>
@@ -773,18 +774,22 @@ const METAL_TIERS = [
 
 const FEATURES = [
   {
+    id: "accessible",
     label: "Accessible",
     icon: <Accessible />,
   },
   {
+    id: "themeable",
     label: "Themeable",
     icon: <Themeable />,
   },
   {
+    id: "composable",
     label: "Composable",
     icon: <Composable />,
   },
   {
+    id: "color-mode",
     label: "Light & Dark Mode",
     icon: <LightAndDark />,
   },
