@@ -32,7 +32,7 @@ export default function Demo() {
 }
 `.trim()
 
-export const Features = ({ id }: { id: string }) => {
+export const Features = ({}: { id: string }) => {
   const showLines = false
   return (
     <Flex align="center" mdDown={{ flexDir: "column" }}>

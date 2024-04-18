@@ -37,12 +37,14 @@ import {
 } from "../components/icons"
 import { Logo, LogoIcon } from "../components/logo"
 import { StatsGFX } from "../components/stats-gfx"
+import users from "../configs/chakra-users"
 import json from "../configs/showcase.json"
 import tweets from "../configs/tweets.json"
 import { getStats } from "../utils/get-stats"
 import { splitNumUnit } from "../utils/number-formatter"
 
 const websites = json.data.slice(0, 8)
+const openCollectiveLink = "https://opencollective.com/chakra-ui"
 
 export default async function Page() {
   const stats = await getStats()
@@ -57,7 +59,7 @@ export default async function Page() {
           align="center"
           px="8"
           flex="1"
-          mdDown={{
+          lgDown={{
             flexWrap: "wrap",
             gap: "6",
           }}
@@ -72,7 +74,7 @@ export default async function Page() {
             justify="center"
             align="center"
             gap="6"
-            mdDown={{
+            lgDown={{
               order: "2",
               flexBasis: "full",
               justifyContent: "space-between",
@@ -117,7 +119,129 @@ export default async function Page() {
       <Box pos="relative">
         <FreeLine />
         {/* Hero */}
+        <Flex align="center" px="8" py="16" maxW="8xl" mx="auto" flex="1">
+          <Stack flex="1" gap="16">
+            <Stack gap="12">
+              <Stack gap="8">
+                <Text
+                  fontSize="6xl"
+                  fontWeight="bold"
+                  lineHeight="72px"
+                  css={{
+                    "& span": {
+                      bg: "teal.600",
+                      rounded: "md",
+                      px: "2",
+                      pb: "1",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      w: "fit-content",
+                      verticalAlign: "middle",
+                    },
+                  }}
+                >
+                  Create accessible React apps <span>with</span>{" "}
+                  <span>speed</span>
+                </Text>
+                <Span color="fg.muted" fontWeight="medium" fontSize="lg">
+                  Chakra UI is a simple, modular and accessible component
+                  library that gives you the building blocks you need to build
+                  your React applications.
+                </Span>
+              </Stack>
+              <Flex gap="4">
+                <Button
+                  rounded="sm"
+                  colorPalette="teal"
+                  fontWeight="semibold"
+                  fontSize={{ base: "sm", lg: "lg" }}
+                  px="7"
+                  py={{ base: "2", lg: "18px" }}
+                  h="auto"
+                  cursor="pointer"
+                  asChild
+                >
+                  <NextLink href="/getting-started">Get Started</NextLink>
+                </Button>
+                <Button
+                  unstyled
+                  rounded="sm"
+                  fontWeight="semibold"
+                  fontSize={{ base: "sm", lg: "lg" }}
+                  px="7"
+                  py="18px"
+                  h="auto"
+                  variant="outline"
+                  color="teal.600"
+                  border="solid 1px currentColor"
+                >
+                  $ yarn add @chakra-ui/react
+                </Button>
+              </Flex>
+            </Stack>
+            <Stack gap="8">
+              <Text fontWeight="bold">These companies trust us</Text>
+              <SimpleGrid
+                columns={{ base: 2, xl: 4 }}
+                alignItems="center"
+                gap="8"
+              >
+                {users
+                  .filter((user) => user.image.includes("."))
+                  .slice(0, 7)
+                  .map((user) => (
+                    <Button
+                      key={user.name}
+                      asChild
+                      unstyled
+                      display="flex"
+                      alignItems="center"
+                      _dark={{ bg: "white" }}
+                      p="4"
+                      h="16"
+                    >
+                      <Link
+                        href={user.url}
+                        css={{
+                          "& .wo": { color: "red" },
+                        }}
+                      >
+                        <Image
+                          src={user.image}
+                          alt={user.name}
+                          width={120}
+                          height={32}
+                          loading="lazy"
+                        />
+                      </Link>
+                    </Button>
+                  ))}
+                <Button
+                  asChild
+                  h="16"
+                  colorPalette="teal"
+                  variant="subtle"
+                  border="1px dashed"
+                  rounded="md"
+                >
+                  <a
+                    href={`${openCollectiveLink}/contribute`}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Box as="span" mr="1" role="img">
+                      💖
+                    </Box>{" "}
+                    Your company
+                  </a>
+                </Button>
+              </SimpleGrid>
+            </Stack>
+          </Stack>
 
+          {/* Hero Show */}
+          <Flex flex="1" hideBelow="md"></Flex>
+        </Flex>
         {/* Features */}
         <Stack px="8" py="16" gap="16" flex="1" maxW="8xl" mx="auto">
           <Stack gap="16">
