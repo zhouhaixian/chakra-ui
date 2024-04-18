@@ -129,6 +129,7 @@ export default async function Page() {
                   lineHeight="72px"
                   css={{
                     "& span": {
+                      color: "white",
                       bg: "teal.600",
                       rounded: "md",
                       px: "2",
@@ -136,7 +137,6 @@ export default async function Page() {
                       display: "inline-flex",
                       alignItems: "center",
                       w: "fit-content",
-                      verticalAlign: "middle",
                     },
                   }}
                 >
