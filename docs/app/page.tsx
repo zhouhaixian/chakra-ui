@@ -29,6 +29,7 @@ import { CommunityGFX } from "../components/community-gfx"
 import { Features } from "../components/features"
 import { FreeLine } from "../components/free-line"
 import { FreeLine2 } from "../components/free-line-2"
+import { HeroShow } from "../components/hero-show"
 import {
   Accessible,
   Composable,
@@ -116,11 +117,11 @@ export default async function Page() {
         </Flex>
       </Flex>
 
-      <Box pos="relative">
+      <Box pos="relative" overflowX="clip">
         <FreeLine />
         {/* Hero */}
-        <Flex align="center" px="8" py="16" maxW="8xl" mx="auto" flex="1">
-          <Stack flex="1" gap="16">
+        <Flex align="center" px="8" maxW="8xl" mx="auto" flex="1" gap="16">
+          <Stack flex="1" gap="16" minW="50%">
             <Stack gap="12">
               <Stack gap="8">
                 <Text
@@ -240,10 +241,10 @@ export default async function Page() {
           </Stack>
 
           {/* Hero Show */}
-          <Flex flex="1" hideBelow="md"></Flex>
+          <HeroShow />
         </Flex>
         {/* Features */}
-        <Stack px="8" py="16" gap="16" flex="1" maxW="8xl" mx="auto">
+        <Stack px="8" py="20" gap="16" flex="1" maxW="8xl" mx="auto">
           <Stack gap="16">
             <Stack gap="4">
               <Stack gap="2">
@@ -648,7 +649,8 @@ export default async function Page() {
                             >
                               <Image
                                 alt={name}
-                                fill
+                                width={48}
+                                height={48}
                                 src={`/avatars/${handle}.jpg`}
                                 loading="lazy"
                               />

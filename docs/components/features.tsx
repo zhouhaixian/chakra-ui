@@ -16,7 +16,7 @@ export default function Demo() {
       justify="center"
       w="320px"
       h="400px"
-      bg={{ base:"white", _dark: "#191919" }}
+      bg={{ base: "white", _dark: "#191919" }}
       shadow="md"
       rounded="md"
     >
