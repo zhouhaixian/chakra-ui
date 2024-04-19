@@ -790,7 +790,7 @@ export default async function Page() {
             </Link>
           </Button>
         </Stack>
-        <Flex hideBelow="md">
+        <Flex hideBelow="md" mr="-16rem">
           <CommunityGFX />
         </Flex>
       </Flex>
